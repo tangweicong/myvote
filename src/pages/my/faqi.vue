@@ -1,29 +1,34 @@
 <template>
 	<view class="content">
-		<!-- <image class="logo" src="/static/logo.png"></image>
+		<image class="logo" src="/static/logo.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
-		</view> -->
-    <home/>
+		</view>
 	</view>
 </template>
 
 <script>
-  import home from './home'; 
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: '发起'
 			}
 		},
-    components: {
-      home
-    },
 		onLoad() {
       
 		},
 		methods: {
-      
+      test() {
+        uni.request({
+          url: 'http://192.168.1.115:9998/app_user/test', //仅为示例，并非真实接口地址。
+          data: {
+              text: ''
+          },
+          success: (res) => {
+              console.log(res.data, 'datatatt');
+          }
+        });
+      }
 		}
 	}
 </script>

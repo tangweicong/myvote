@@ -4,26 +4,39 @@
 		<view>
 			<text class="title">{{title}}</text>
 		</view> -->
-    <home/>
+    <!-- <tousu /> -->
+    <votePage />
 	</view>
 </template>
 
 <script>
-  import home from './home'; 
+import tousu from '../components/tosu'
+import votePage from '../components/votePage'
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: '审核'
 			}
 		},
     components: {
-      home
+      tousu,
+      votePage,
     },
 		onLoad() {
       
 		},
 		methods: {
-      
+      test() {
+        uni.request({
+          url: 'http://192.168.1.115:9998/app_user/test', //仅为示例，并非真实接口地址。
+          data: {
+              text: ''
+          },
+          success: (res) => {
+              console.log(res.data, 'datatatt');
+          }
+        });
+      }
 		}
 	}
 </script>
