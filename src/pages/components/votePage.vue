@@ -2,13 +2,13 @@
 	<view class="vote-page-content">
     <view class="vote-page-title">
       <text class="page-title-text">{{voteObj.title}}</text>
-      <image src="/static/share.png"></image>
+      <image @click="share" src="/static/share.png"></image>
     </view>
     <text class="vote-page-type">{{voteObj.type === 1 ? '[单选]' : '[多选]'}}</text>
     <view class="vote-page-option" v-for="(item, index) in voteObj.options" :key="index">
       <view>
         <text class="option-text">{{item.text}}</text>
-        <image class="chose" src="/static/chose.png"></image>
+        <image v-if="index==1" class="chose" src="/static/chose.png"></image>
       </view>
       <view class="tongji">
         <text class="piaoshu">{{item.people}}票</text>
@@ -45,7 +45,23 @@
      
 		},
 		methods: {
-      
+      share() {
+        console.log('shrrrrr')
+        uni.share({
+            provider: "weixin",
+            scene: "WXSceneSession",
+            type: 0,
+            href: "http://uniapp.dcloud.io/",
+            title: "小程序分享",
+            summary: "我正在使用这个小程序进行投票，快来一起投票吧",
+            success: function (res) {
+                console.log("success:" + JSON.stringify(res));
+            },
+            fail: function (err) {
+                console.log("fail:" + JSON.stringify(err));
+            }
+        });
+      }
 		}
 	}
 </script>

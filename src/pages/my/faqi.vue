@@ -1,19 +1,27 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
+		<!-- <image class="logo" src="/static/png.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
-		</view>
+		</view> -->
+    <!-- <success /> -->
+    <guanliyuanshenhe />
 	</view>
 </template>
 
 <script>
+  import success from '../components/success'
+  import guanliyuanshenhe from '../components/guanliyuanshenhe'
 	export default {
 		data() {
 			return {
 				title: '发起'
 			}
 		},
+    components: {
+      success,
+      guanliyuanshenhe
+    },
 		onLoad() {
       
 		},

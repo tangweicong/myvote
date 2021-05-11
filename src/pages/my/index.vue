@@ -6,28 +6,23 @@
           <text :class="{textColor: activeIndex == index}">{{item}}</text>
         </view>
       </view>
-      <Swiper :options="swiperOption" ref="mySwiper" id="swipers">
-        <SwiperSlide>
-          <chuangjian />
-        </SwiperSlide>
-        <SwiperSlide>
-          <shenhe />
-        </SwiperSlide>
-        <SwiperSlide>
-          <faqi />
-        </SwiperSlide>
-      </Swiper>
+      <template>
+        <view>
+          <component :is="currentComponents"></component>
+        </view>
+      </template>
 	</view>
 </template>
 
 <script>
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-import 'swiper/swiper-bundle.css'
-import BetterScroll from 'better-scroll'
 import chuangjian from './chuangjian';
 import shenhe from './shenhe';
 import faqi from './faqi';
-let vm = null;
+const compConfig = {
+  0: chuangjian,
+  1: shenhe,
+  2: faqi
+}
 	export default {
 		data() {
 			return {
@@ -36,65 +31,18 @@ let vm = null;
         activeIndex:0,
         swiperIndex: 0,
         indicatorDots: true,
-        swiperOption: {
-          notNextTick: true,
-          initialSlide: 0,
-          speed: 800,
-          //滑动方向
-          direction: "horizontal",
-          //小手掌抓取滑动
-          grabCursor: true,
-          on: {
-            slideChangeTransitionEnd: function () {
-              console.log(this.activeIndex);
-              // console.log(vm,'vmvmvm');
-              const index = this.activeIndex;
-              vm.handleClickSlide(index);
-              // 切换结束时，告诉我现在是第几个slide
-            }
-          }
-        }
+        currentComponents: compConfig[0],
       }
 		},
-    components: {
-      Swiper,
-    SwiperSlide,
-      chuangjian,
-      shenhe,
-      faqi
-    },
-    directives: {
-    swiper: directive
-  },
-    computed: {
-      aswiper() {
-        return this.$refs.mySwiper;
-      }
-    },
 		onLoad() {
-      vm = this;
 		},
 		methods: {
       handleClickSlide(index) {
         this.activeIndex = index;
       },
-      test() {
-        uni.request({
-          url: 'http://192.168.1.115:9998/app_user/test', //仅为示例，并非真实接口地址。
-          data: {
-              text: ''
-          },
-          success: (res) => {
-              console.log(res.data, 'datatatt');
-          }
-        });
-      },
       changeIndex(index) {
-        const swipers = document.getElementById('swipers');
-        console.log(swipers, 'swwwwww', this.aswiper)
         this.activeIndex = index;
-        this.aswiper.slideTo(3, 1000, false);
-        // this.$refs.mySwiper.slideTo(this.activeIndex, 400)
+        this.currentComponents = compConfig[index]
       }
 		}
 	}

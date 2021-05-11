@@ -1,29 +1,19 @@
 <template>
 	<view class="content">
-		<!-- <image class="logo" src="/static/logo.png"></image>
+		<image class="logo" src="/static/ok.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
-		</view> -->
-    <!-- <tousu /> -->
-    <votePage />
+		</view>
 	</view>
 </template>
 
 <script>
-import tousu from '../components/tosu'
-import votePage from '../components/votePage'
-
 	export default {
 		data() {
 			return {
-				title: '审核'
+				title: '成功！'
 			}
 		},
-    components: {
-      tousu,
-      votePage,
-      
-    },
 		onLoad() {
       
 		},

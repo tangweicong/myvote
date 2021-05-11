@@ -3,19 +3,19 @@
 		<view class="pre-vote" v-for="(item, index) in voteArr" :key="index" @click="openButtons(index)">
       <text class="title-text">{{item.title}}</text>
       <view v-if="showButtons && editIndex === index" class="buttons">
-        <view class="edit button" @click="edit">
+        <view class="edit button" @click.stop="edit">
           <image src="/static/edit.png"></image>
           <text>编辑</text>
         </view>
-        <view class="delete button" @click="shanchu">
+        <view class="delete button" @click.stop="shanchu">
           <image src="/static/delete.png"></image>
           <text>删除</text>
         </view>
-        <view class="check button" @click="check">
+        <view class="check button" @click.stop="check">
           <image src="/static/chakan.png"></image>
           <text>查看</text>
         </view>
-        <view class="share button" @click="share">
+        <view class="share button" @click.stop="share">
           <image src="/static/share.png"></image>
           <text>转发</text>
         </view>
@@ -51,8 +51,26 @@
         this.showButtons = !this.showButtons;
       },
       edit() {},
-      shanchu() {},
-      share() {},
+      shanchu(id) {
+        // 调用删除接口
+      },
+      share() {
+        console.log('shrrrrr')
+        uni.share({
+            provider: "weixin",
+            scene: "WXSceneSession",
+            type: 0,
+            href: "http://uniapp.dcloud.io/",
+            title: "小程序分享",
+            summary: "我正在使用这个小程序进行投票，快来一起投票吧",
+            success: function (res) {
+                console.log("success:" + JSON.stringify(res));
+            },
+            fail: function (err) {
+                console.log("fail:" + JSON.stringify(err));
+            }
+        });
+      },
       check() {}
 		}
 	}

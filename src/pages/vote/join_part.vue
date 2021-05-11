@@ -62,8 +62,6 @@
             focus: false,
             desc: '',
             isNiming: false,
-            inputValue: '',
-            changeValue: '',
             date: currentDate,
             typeArray: [
               {
@@ -102,20 +100,6 @@
         }
     },
     methods: {
-        onKeyInput: function(event) {
-            this.inputValue = event.target.value
-        },
-        replaceInput: function(event) {
-            var value = event.target.value;
-            if (value === '11') {
-                this.changeValue = '2';
-            }
-        },
-        hideKeyboard: function(event) {
-            if (event.target.value === '123') {
-                uni.hideKeyboard();
-            }
-        },
         bindPickerChange: function(e) {
             console.log('picker发送选择改变，携带值为', e.target.value)
             this.index = e.target.value
